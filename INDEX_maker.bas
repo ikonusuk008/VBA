@@ -1,5 +1,7 @@
 Attribute VB_Name = "INDEX_maker"
 Sub INDEX_maker_main()
+    'Summary
+    'This program is making index sheet.
    
     Dim sheetCount As Integer
     Dim j As Integer
@@ -33,7 +35,8 @@ Sub INDEX_maker_main()
     Range("A1").Activate
     ActiveCell.Value = sheetCount & "Sheet"
     
-	'Get sheet information and write to INDEX sheet.
+
+    'Get sheet information and write to INDEX sheet.
     For i = 2 To sheetCount
     
         worksheetName = Worksheets(i).name
