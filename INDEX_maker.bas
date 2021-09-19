@@ -33,6 +33,7 @@ Sub INDEX_maker_main()
     Range("A1").Activate
     ActiveCell.Value = sheetCount & "Sheet"
     
+	'Get sheet information and write to INDEX sheet.
     For i = 2 To sheetCount
     
         worksheetName = Worksheets(i).name
