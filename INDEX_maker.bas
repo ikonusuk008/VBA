@@ -1,7 +1,7 @@
 Attribute VB_Name = "INDEX_maker"
 Sub INDEX_maker_main()
     'Summary
-    'This program is making index sheet.
+    'This program creates a table of contents sheet.
    
     Dim sheetCount As Integer
     Dim j As Integer
