@@ -14,13 +14,13 @@ Function 買い(ByVal n As Long)
         
                         
         Dim 日24時間 As Long
-        日24時間 = 24
+        日24時間 = 13
         
         Dim 日数インデックス As Long
         日数インデックス = (n * 日24時間)
         
         Dim 決済時刻列 As Long
-        決済時刻列 = 22
+        決済時刻列 = 13
 
        
         
@@ -29,11 +29,11 @@ Function 買い(ByVal n As Long)
         Dim ブレーク判定値 As Integer  '（１：ブレークなし。２：ブレークあり。３：ブレーク損切）
         ブレーク判定値 = 1  'リセット
        
-        東京市場高値 = WorksheetFunction.Max(Range("d" & 10 + 日数インデックス & ":d" & 15 + 日数インデックス))
+        東京市場高値 = WorksheetFunction.Max(Range("d" & 1 + 日数インデックス & ":d" & 6 + 日数インデックス))
         
         
         '東京市場　高値　ブレーク
-        For i = 16 + 日数インデックス To 決済時刻列 + 日数インデックス    '15時から２２時まで
+        For i = 1 + 日数インデックス To 決済時刻列 + 日数インデックス    '15時から２２時まで
             
                 欧州1時間値 = CDbl(Range("f" & i).Value)
         
@@ -76,13 +76,13 @@ Function 売り(ByVal n As Long)
         
         
         Dim 日24時間 As Long
-        日24時間 = 24
+        日24時間 = 13
         
         Dim 日数インデックス As Long
         日数インデックス = (n * 日24時間)
         
         Dim 決済時刻列 As Long
-        決済時刻列 = 22
+        決済時刻列 = 13
 
         
         
@@ -92,10 +92,10 @@ Function 売り(ByVal n As Long)
         
         ブレーク判定値 = 1  'リセット
        
-        東京市場安値 = WorksheetFunction.Min(Range("e" & 10 + 日数インデックス & ":e" & 15 + 日数インデックス))
+        東京市場安値 = WorksheetFunction.Min(Range("e" & 1 + 日数インデックス & ":e" & 6 + 日数インデックス))
         
         '東京市場　安値　ブレーク
-        For i = 16 + 日数インデックス To 決済時刻列 + 日数インデックス
+        For i = 1 + 日数インデックス To 決済時刻列 + 日数インデックス
             
                 欧州1時間値 = CDbl(Range("f" & i).Value)
         
@@ -159,7 +159,7 @@ Sub 日に24行が含まれていなければ､その日は対象外として削除する()
         
                         If Range("a" & i).Value <> Range("a" & i + 1).Value Then
                                
-                               If 一日の時間数カウント = 24 Then
+                               If 一日の時間数カウント = 13 Then
                                         一日の時間数カウント = 0
                                         
                                Else
