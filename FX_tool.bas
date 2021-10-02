@@ -1,8 +1,9 @@
 Attribute VB_Name = "FX_tool"
 Sub main()
 
+        extract_2200_of_13H
+
         ì˙Ç…13çsÇ™ä‹Ç‹ÇÍÇƒÇ¢Ç»ÇØÇÍÇŒ§ÇªÇÃì˙ÇÕëŒè€äOÇ∆ÇµÇƒçÌèúÇ∑ÇÈ
-       
         
         Debug.Print "Start Input BUY and SELL"
 
@@ -201,6 +202,8 @@ Attribute extract_2200_of_13H.VB_ProcData.VB_Invoke_Func = " \n14"
 '
 
 '
+Macro1
+
     Cells.Select
     Selection.AutoFilter
     ActiveSheet.Range("$A$1:$H$44000").AutoFilter Field:=2, Criteria1:="15:00"
@@ -210,5 +213,27 @@ Attribute extract_2200_of_13H.VB_ProcData.VB_Invoke_Func = " \n14"
     Range("H23751").Select
     ActiveWindow.SmallScroll Down:=-129
  
-    ActiveWorkbook.Save
 End Sub
+Sub Macro1()
+'
+' Macro1 Macro
+'
+
+'
+    Cells.Select
+    Selection.Replace What:=".", Replacement:="/", LookAt:=xlPart, _
+        SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
+        ReplaceFormat:=False
+    Cells.Select
+    Selection.AutoFilter
+    ActiveSheet.Range("$A$1:$G$44000").AutoFilter Field:=2, Criteria1:=Array( _
+        "0:00", "1:00", "16:00", "17:00", "18:00", "19:00", "2:00", "20:00", "21:00", "22:00", _
+        "23:00"), Operator:=xlFilterValues
+    ActiveWindow.SmallScroll Down:=-18
+    Rows("1:1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.Delete Shift:=xlUp
+    ActiveWindow.SmallScroll Down:=-210
+    Range("A1").Select
+End Sub
+
