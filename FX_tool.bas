@@ -1,5 +1,5 @@
 Attribute VB_Name = "FX_tool"
-Sub main()
+Sub FX_tool_main()
 
         extract_2200_of_13H
 
@@ -203,6 +203,7 @@ Attribute extract_2200_of_13H.VB_ProcData.VB_Invoke_Func = " \n14"
 
 '
 Macro1
+Macro2
 
     Cells.Select
     Selection.AutoFilter
@@ -220,11 +221,16 @@ Sub Macro1()
 '
 
 '
-    Cells.Select
+
+
+   Columns("A:A").Select
     Selection.Replace What:=".", Replacement:="/", LookAt:=xlPart, _
         SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
         ReplaceFormat:=False
     Cells.Select
+    
+    
+    
     Selection.AutoFilter
     ActiveSheet.Range("$A$1:$G$44000").AutoFilter Field:=2, Criteria1:=Array( _
         "0:00", "1:00", "16:00", "17:00", "18:00", "19:00", "2:00", "20:00", "21:00", "22:00", _
@@ -236,4 +242,13 @@ Sub Macro1()
     ActiveWindow.SmallScroll Down:=-210
     Range("A1").Select
 End Sub
+Sub Macro2()
+'
+' Macro2 Macro
+'
 
+'
+    Columns("G:G").Select
+    Selection.ClearContents
+    Range("G1").Select
+End Sub
