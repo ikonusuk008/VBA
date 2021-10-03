@@ -8,6 +8,7 @@ Sub FX_tool_main()
         Debug.Print "Start Input BUY and SELL"
 
         '‚R‚U‚T~‚T‚P‚W‚Q‚T“ú
+        '“ú‚Ås”rœ‚µ‚½As”‚ªˆ—‘ÎÛ”‚Æ‚È‚éB
         For n = 0 To 1829
         
                 ”ƒ‚¢ (n)
