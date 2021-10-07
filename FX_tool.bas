@@ -9,7 +9,7 @@ Sub FX_tool_main()
 
         '‚R‚U‚T~‚T‚P‚W‚Q‚T“ú
         '“ú‚Ås”rœ‚µ‚½As”‚ªˆ—‘ÎÛ”‚Æ‚È‚éB
-        For n = 0 To 1829
+        For n = 0 To 1834
         
                 ”ƒ‚¢ (n)
                 ”„‚è (n)
