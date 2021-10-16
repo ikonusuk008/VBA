@@ -1,15 +1,27 @@
 Attribute VB_Name = "FX_tool"
 Sub FX_tool_main()
 
+        
+        
+        'Workbooks.Open "C:\Users\User\Google ドライブ\00-share\MT4\GBPJPY60.csv"
+
         extract_2200_of_13H
+
 
         日に13行が含まれていなければ､その日は対象外として削除する
         
         Debug.Print "Start Input BUY and SELL"
-
         
-        '日で行排除した、行数が処理対象数となる。
-        For n = 0 To Range("A:A").Count / 13
+        
+            
+    '最終行--------------------------------
+    Dim xlLastRow As Long
+    Dim end_r As Long
+    xlLastRow = Cells(Rows.Count, 1).Row
+    end_r = Cells(xlLastRow, 1).End(xlUp).Row
+    '--------------------------------最終
+
+        For n = 0 To end_r \ 13
         
                 買い (n)
                 売り (n)
@@ -85,11 +97,17 @@ Function 買い(ByVal n As Long)
                 'トレード無し
                 Range("g" & Settlement_time_sequence + Days_index).Value = 0
         ElseIf Break_judgment_value = 2 Then
+        
+                Dim a As Long
+                
+                a = Europe_1_hour_value - European_closing_price
+        
+        
                 'ブレーク後の決済
                 '
                'Range("g" & Settlement_time_sequence + Days_index).Value = (European_closing_price - Tokyo_market_high_price) * 100
                 
-                Range("g" & Settlement_time_sequence + Days_index).Value = (Europe_1_hour_value - Tokyo_market_high_price) * 100
+                Range("g" & Settlement_time_sequence + Days_index).Value = (European_closing_price - Tokyo_market_high_price - a) * 100
                 
         ElseIf Break_judgment_value = 3 Then
                 'ブレーク後の損切り
