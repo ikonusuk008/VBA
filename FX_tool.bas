@@ -7,9 +7,9 @@ Sub FX_tool_main()
         
         Debug.Print "Start Input BUY and SELL"
 
-        '３６５×５＝１８２５日
+        
         '日で行排除した、行数が処理対象数となる。
-        For n = 0 To 1834
+        For n = 0 To Range("A:A").Count / 13
         
                 買い (n)
                 売り (n)
@@ -33,8 +33,6 @@ Function 買い(ByVal n As Long)
         
         Dim Settlement_time_sequence As Long
         Settlement_time_sequence = 13
-
-       
         
         European_closing_price = Range("f" & (Settlement_time_sequence + Days_index)).Value
         
@@ -50,6 +48,20 @@ Function 買い(ByVal n As Long)
                 Europe_1_hour_value = CDbl(Range("f" & i).Value)
         
                 If Europe_1_hour_value > Tokyo_market_high_price Then
+                
+                
+                
+                        'ここで更に、東京市場高値で買いができた場合　という条件が必要。・・・①
+                        'または、東京市場高値より、Xpips（最適解が必要）下がった時、という条件が必要。・・・②
+                        'または、そのまま、東京市場高値を超えた終値から計算する。・・・③
+                        
+                        '調査
+                        '１H終値のブレークが必要か。東京市場Xpipsブレークでいいのではないか。
+                
+                
+                
+                
+                
                         Break_judgment_value = 2
                         Exit For
                 End If
@@ -58,7 +70,8 @@ Function 買い(ByVal n As Long)
         'ブレーク後の損切り判定
         For i2 = i To Settlement_time_sequence + Days_index
                 Europe_1_hour_value = CDbl(Range("f" & i2).Value)
-        
+                
+
                 If ((Europe_1_hour_value - Tokyo_market_high_price) * 100) < -30 Then
                     
                         Break_judgment_value = 3
@@ -73,7 +86,11 @@ Function 買い(ByVal n As Long)
                 Range("g" & Settlement_time_sequence + Days_index).Value = 0
         ElseIf Break_judgment_value = 2 Then
                 'ブレーク後の決済
-                Range("g" & Settlement_time_sequence + Days_index).Value = (European_closing_price - Tokyo_market_high_price) * 100
+                '
+               'Range("g" & Settlement_time_sequence + Days_index).Value = (European_closing_price - Tokyo_market_high_price) * 100
+                
+                Range("g" & Settlement_time_sequence + Days_index).Value = (Europe_1_hour_value - Tokyo_market_high_price) * 100
+                
         ElseIf Break_judgment_value = 3 Then
                 'ブレーク後の損切り
                 Range("g" & Settlement_time_sequence + Days_index).Value = -30
