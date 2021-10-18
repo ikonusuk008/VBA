@@ -1,28 +1,28 @@
 Attribute VB_Name = "FX_tool"
+Dim STOP_LOSS As Long
+
+
 Sub FX_tool_main()
 
-        
-        
+
+        'TODO　自動で開いて書き込む。開いている場合は、閉じて実行する。
         'Workbooks.Open "C:\Users\User\Google ドライブ\00-share\MT4\GBPJPY60.csv"
 
-        extract_2200_of_13H
+        extract_2200_of_13H '対象外の時間の行を削除する。
 
-
-        日に13行が含まれていなければ､その日は対象外として削除する
+        日に13行が含まれていなければ､その日は対象外として削除する '対象時間が欠けている日の行は削除する｡
         
         Debug.Print "Start Input BUY and SELL"
         
-        
             
-    '最終行--------------------------------
-    Dim xlLastRow As Long
-    Dim end_r As Long
-    xlLastRow = Cells(Rows.Count, 1).Row
-    end_r = Cells(xlLastRow, 1).End(xlUp).Row
-    '--------------------------------最終
+        '最終行--------------------------------
+        Dim xlLastRow As Long
+        Dim end_r As Long
+        xlLastRow = Cells(Rows.Count, 1).Row
+        end_r = Cells(xlLastRow, 1).End(xlUp).Row
+        '--------------------------------最終
 
         For n = 0 To end_r \ 13
-        
                 買い (n)
                 売り (n)
         Next n
@@ -32,13 +32,16 @@ Sub FX_tool_main()
 End Sub
 Function 買い(ByVal n As Long)
 
+        STOP_LOSS = -5
+
         Dim Tokyo_market_high_price As Double
         Dim Europe_1_hour_value As Double
         Dim European_closing_price As Double
-        
-                        
         Dim t_13_hours_a_day As Long
         t_13_hours_a_day = 13
+        
+        
+
         
         Dim Days_index As Long
         Days_index = (n * t_13_hours_a_day)
@@ -53,16 +56,14 @@ Function 買い(ByVal n As Long)
        
         Tokyo_market_high_price = WorksheetFunction.Max(Range("d" & 1 + Days_index & ":d" & 6 + Days_index))
         
-        
-        '東京市場　高値　ブレーク
+        '東京市場の高値をブレークブレークする行を検索し、グラグ２（ブレークあり）を設定する。
         For i = 1 + Days_index To Settlement_time_sequence + Days_index    '15時から２２時まで
             
                 Europe_1_hour_value = CDbl(Range("f" & i).Value)
         
                 If Europe_1_hour_value > Tokyo_market_high_price Then
                 
-                
-                
+            
                         'ここで更に、東京市場高値で買いができた場合　という条件が必要。・・・①
                         'または、東京市場高値より、Xpips（最適解が必要）下がった時、という条件が必要。・・・②
                         'または、そのまま、東京市場高値を超えた終値から計算する。・・・③
@@ -70,21 +71,16 @@ Function 買い(ByVal n As Long)
                         '調査
                         '１H終値のブレークが必要か。東京市場Xpipsブレークでいいのではないか。
                 
-                
-                
-                
-                
                         Break_judgment_value = 2
                         Exit For
                 End If
         Next i
         
-        'ブレーク後の損切り判定
+        'ブレーク後、損切り判定を行い、Xpipsでフラグ３（ブレーク損切）を設定する。
         For i2 = i To Settlement_time_sequence + Days_index
                 Europe_1_hour_value = CDbl(Range("f" & i2).Value)
-                
 
-                If ((Europe_1_hour_value - Tokyo_market_high_price) * 100) < -30 Then
+                If ((Europe_1_hour_value - Tokyo_market_high_price) * 100) < STOP_LOSS Then
                     
                         Break_judgment_value = 3
                         
@@ -111,11 +107,13 @@ Function 買い(ByVal n As Long)
                 
         ElseIf Break_judgment_value = 3 Then
                 'ブレーク後の損切り
-                Range("g" & Settlement_time_sequence + Days_index).Value = -30
+                Range("g" & Settlement_time_sequence + Days_index).Value = STOP_LOSS
         End If
 
 End Function
 Function 売り(ByVal n As Long)
+
+        STOP_LOSS = -5
 
         Dim Tokyo_market_low As Double
         Dim Europe_1_hour_value As Double
@@ -157,7 +155,7 @@ Function 売り(ByVal n As Long)
         For i2 = i To Settlement_time_sequence + Days_index   'ブレーク後の損切り判定
                 Europe_1_hour_value = CDbl(Range("f" & i2).Value)
         
-                If ((Tokyo_market_low - Europe_1_hour_value) * 100) < -30 Then
+                If ((Tokyo_market_low - Europe_1_hour_value) * 100) < STOP_LOSS Then
                         Break_judgment_value = 3
                         Exit For
                 End If
@@ -172,7 +170,7 @@ Function 売り(ByVal n As Long)
                 Range("h" & Settlement_time_sequence + Days_index).Value = (Tokyo_market_low - European_closing_price) * 100
         ElseIf Break_judgment_value = 3 Then
                 'ブレーク後の損切り
-                Range("h" & Settlement_time_sequence + Days_index).Value = -30
+                Range("h" & Settlement_time_sequence + Days_index).Value = STOP_LOSS
         End If
 
 End Function
@@ -248,6 +246,7 @@ Macro2
     ActiveWindow.SmallScroll Down:=9
     Range("H23751").Select
     ActiveWindow.SmallScroll Down:=-129
+    
  
 End Sub
 Sub Macro1()
@@ -255,15 +254,11 @@ Sub Macro1()
 ' Macro1 Macro
 '
 
-'
-
-
    Columns("A:A").Select
     Selection.Replace What:=".", Replacement:="/", LookAt:=xlPart, _
         SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
         ReplaceFormat:=False
     Cells.Select
-    
     
     
     Selection.AutoFilter
@@ -286,4 +281,47 @@ Sub Macro2()
     Columns("G:G").Select
     Selection.ClearContents
     Range("G1").Select
+End Sub
+
+Sub prepare_pibot_table()
+'ル設定
+' 東京市場ブレークアウトのデータ取得後のピボットの準備
+'
+
+    Rows("1:1").Select
+    Selection.Insert Shift:=xlDown, CopyOrigin:=xlFormatFromLeftOrAbove '先頭行を挿入
+    
+    Range("A1").Select
+    ActiveCell.FormulaR1C1 = "A1"
+    Range("A1").Selectv
+
+    Selection.AutoFill Destination:=Range("A1:H1"), Type:=xlFillDefault 'A1からA８まで列名を作成する。
+    Range("A1:H1").Select
+    
+    Selection.AutoFilter 'フィルタ設定
+    
+    ActiveSheet.Range("$A$1:$H$76272").AutoFilter Field:=7, Criteria1:="<>" 'G列の空列を排除
+    
+    Range(Selection, Selection.End(xlDown)).Select '最終行まで選択状態にする｡
+    Selection.Copy 'コピーする。
+    
+    sheets.Add After:=ActiveSheet '横にシートを作成する。
+    
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False 'テキストで貼り付ける。
+    
+    
+        '日付と時間のセル設定
+        
+        Columns("A:A").Select
+    Application.CutCopyMode = False
+    Selection.NumberFormatLocal = "yyyy/m/d"
+    Columns("B:B").Select
+    Selection.NumberFormatLocal = "[$-x-systime]h:mm:ss AM/PM"
+    
+    '表の選択
+    Range("A1:H1").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    
+    
 End Sub
