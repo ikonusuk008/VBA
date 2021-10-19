@@ -1,9 +1,6 @@
 Attribute VB_Name = "FX_tool"
 Dim STOP_LOSS As Long
-
-
 Sub FX_tool_main()
-
 
         'TODO　自動で開いて書き込む。開いている場合は、閉じて実行する。
         'Workbooks.Open "C:\Users\User\Google ドライブ\00-share\MT4\GBPJPY60.csv"
@@ -13,7 +10,6 @@ Sub FX_tool_main()
         日に13行が含まれていなければ､その日は対象外として削除する '対象時間が欠けている日の行は削除する｡
         
         Debug.Print "Start Input BUY and SELL"
-        
             
         '最終行--------------------------------
         Dim xlLastRow As Long
@@ -39,8 +35,6 @@ Function 買い(ByVal n As Long)
         Dim European_closing_price As Double
         Dim t_13_hours_a_day As Long
         t_13_hours_a_day = 13
-        
-        
 
         
         Dim Days_index As Long
@@ -224,17 +218,11 @@ Sub 日に13行が含まれていなければ､その日は対象外として削除する()
        Next EVERYDAY
        
        Debug.Print "END 日に13行が含まれていなければ､その日は対象外として削除する"
-       
       
 End Sub
-
 Sub extract_2200_of_13H()
 Attribute extract_2200_of_13H.VB_ProcData.VB_Invoke_Func = " \n14"
-'
-' extract_13_of Macro
-'
 
-'
 Macro1
 Macro2
 
@@ -246,13 +234,9 @@ Macro2
     ActiveWindow.SmallScroll Down:=9
     Range("H23751").Select
     ActiveWindow.SmallScroll Down:=-129
-    
  
 End Sub
 Sub Macro1()
-'
-' Macro1 Macro
-'
 
    Columns("A:A").Select
     Selection.Replace What:=".", Replacement:="/", LookAt:=xlPart, _
@@ -271,18 +255,15 @@ Sub Macro1()
     Selection.Delete Shift:=xlUp
     ActiveWindow.SmallScroll Down:=-210
     Range("A1").Select
+    
 End Sub
 Sub Macro2()
-'
-' Macro2 Macro
-'
 
-'
     Columns("G:G").Select
     Selection.ClearContents
     Range("G1").Select
+    
 End Sub
-
 Sub prepare_pibot_table()
 'ル設定
 ' 東京市場ブレークアウトのデータ取得後のピボットの準備
