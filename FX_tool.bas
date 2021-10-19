@@ -226,6 +226,8 @@ Attribute extract_2200_of_13H.VB_ProcData.VB_Invoke_Func = " \n14"
 Macro1
 Macro2
 
+    'TODO　この当たり、動的に数値を変更できるようにする。
+
     Cells.Select
     Selection.AutoFilter
     ActiveSheet.Range("$A$1:$H$44000").AutoFilter Field:=2, Criteria1:="15:00"
@@ -237,19 +239,23 @@ Macro2
  
 End Sub
 Sub Macro1()
-
-   Columns("A:A").Select
+        '日付の区切りを.から／に置換
+    Columns("A:A").Select
     Selection.Replace What:=".", Replacement:="/", LookAt:=xlPart, _
         SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, _
         ReplaceFormat:=False
     Cells.Select
     
-    
+    'フィルタ設定
     Selection.AutoFilter
-    ActiveSheet.Range("$A$1:$G$44000").AutoFilter Field:=2, Criteria1:=Array( _
+    
+    '削除対象を抽出する。
+    ActiveSheet.Range("$A$1:$G$200000").AutoFilter Field:=2, Criteria1:=Array( _
         "0:00", "1:00", "16:00", "17:00", "18:00", "19:00", "2:00", "20:00", "21:00", "22:00", _
         "23:00"), Operator:=xlFilterValues
+    
     ActiveWindow.SmallScroll Down:=-18
+    
     Rows("1:1").Select
     Range(Selection, Selection.End(xlDown)).Select
     Selection.Delete Shift:=xlUp
@@ -265,7 +271,7 @@ Sub Macro2()
     
 End Sub
 Sub prepare_pibot_table()
-'ル設定
+'ル－ル設定
 ' 東京市場ブレークアウトのデータ取得後のピボットの準備
 '
 
@@ -274,14 +280,16 @@ Sub prepare_pibot_table()
     
     Range("A1").Select
     ActiveCell.FormulaR1C1 = "A1"
-    Range("A1").Selectv
+    Range("A1").Select
 
-    Selection.AutoFill Destination:=Range("A1:H1"), Type:=xlFillDefault 'A1からA８まで列名を作成する。
+    'A1からA８まで列名を作成する。
+    Selection.AutoFill Destination:=Range("A1:H1"), Type:=xlFillDefault
     Range("A1:H1").Select
     
     Selection.AutoFilter 'フィルタ設定
     
-    ActiveSheet.Range("$A$1:$H$76272").AutoFilter Field:=7, Criteria1:="<>" 'G列の空列を排除
+    'G列の空列を排除
+    ActiveSheet.Range("$A$1:$H$200000").AutoFilter Field:=7, Criteria1:="<>"
     
     Range(Selection, Selection.End(xlDown)).Select '最終行まで選択状態にする｡
     Selection.Copy 'コピーする。
@@ -291,10 +299,8 @@ Sub prepare_pibot_table()
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False 'テキストで貼り付ける。
     
-    
-        '日付と時間のセル設定
-        
-        Columns("A:A").Select
+    '日付と時間のセル設定
+    Columns("A:A").Select
     Application.CutCopyMode = False
     Selection.NumberFormatLocal = "yyyy/m/d"
     Columns("B:B").Select
@@ -303,6 +309,5 @@ Sub prepare_pibot_table()
     '表の選択
     Range("A1:H1").Select
     Range(Selection, Selection.End(xlDown)).Select
-    
     
 End Sub
