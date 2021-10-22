@@ -1,5 +1,14 @@
 Attribute VB_Name = "FX_tool"
+
 Dim STOP_LOSS As Long
+Sub Eopen()
+
+
+Workbooks.Open "C:\Users\User\Google ドライブ\00-share\MT4\GBPJPY60.csv"
+
+
+End Sub
+
 Sub FX_tool_main()
 
         'TODO　自動で開いて書き込む。開いている場合は、閉じて実行する。
@@ -38,7 +47,7 @@ Function 買い(ByVal n As Long)
 
         
         Dim Days_index As Long
-        Days_index = (n * t_13_hours_a_day)
+        Days_index = (n * t_13_hours_a_day) '日数×１日の対象行数を示す。
         
         Dim Settlement_time_sequence As Long
         Settlement_time_sequence = 13
