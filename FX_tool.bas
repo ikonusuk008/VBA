@@ -1,6 +1,7 @@
 Attribute VB_Name = "FX_tool"
+Public Const STOP_LOSS = -30
 
-Dim STOP_LOSS As Long
+
 Sub Eopen()
 
 
@@ -8,7 +9,6 @@ Workbooks.Open "C:\Users\User\Google ドライブ\00-share\MT4\GBPJPY60.csv"
 
 
 End Sub
-
 Sub FX_tool_main()
 
         'TODO　自動で開いて書き込む。開いている場合は、閉じて実行する。
@@ -36,9 +36,7 @@ Sub FX_tool_main()
         
 End Sub
 Function 買い(ByVal n As Long)
-
-        STOP_LOSS = -5
-
+       
         Dim Tokyo_market_high_price As Double
         Dim Europe_1_hour_value As Double
         Dim European_closing_price As Double
@@ -50,12 +48,12 @@ Function 買い(ByVal n As Long)
         Days_index = (n * t_13_hours_a_day) '日数×１日の対象行数を示す。
         
         Dim Settlement_time_sequence As Long
-        Settlement_time_sequence = 13
+        Settlement_time_sequence = 13  '対象日数
         
         European_closing_price = Range("f" & (Settlement_time_sequence + Days_index)).Value
         
         Dim Break_judgment_value As Integer  '（１：ブレークなし。２：ブレークあり。３：ブレーク損切）
-        Break_judgment_value = 1  'リセット
+        Break_judgment_value = 1  'ブレークなし
        
         Tokyo_market_high_price = WorksheetFunction.Max(Range("d" & 1 + Days_index & ":d" & 6 + Days_index))
         
@@ -116,8 +114,6 @@ Function 買い(ByVal n As Long)
 End Function
 Function 売り(ByVal n As Long)
 
-        STOP_LOSS = -5
-
         Dim Tokyo_market_low As Double
         Dim Europe_1_hour_value As Double
         Dim European_closing_price As Double
@@ -130,7 +126,7 @@ Function 売り(ByVal n As Long)
         Days_index = (n * t_13_hours_a_day)
         
         Dim Settlement_time_sequence As Long
-        Settlement_time_sequence = 13
+        Settlement_time_sequence = 13 '対象日数
 
         
         
@@ -138,7 +134,7 @@ Function 売り(ByVal n As Long)
         
         Dim Break_judgment_value As Integer  '（１：ブレークなし。２：ブレークあり。３：ブレーク損切）
         
-        Break_judgment_value = 1  'リセット
+        Break_judgment_value = 1  'ブレークなし
        
         Tokyo_market_low = WorksheetFunction.Min(Range("e" & 1 + Days_index & ":e" & 6 + Days_index))
         
