@@ -1,12 +1,10 @@
 Attribute VB_Name = "FX_tool"
 Public Const STOP_LOSS = -30
-
+Public Const SETTLEMENT_TIME_SEQUENCE = 13
 
 Sub Eopen()
 
-
-Workbooks.Open "C:\Users\User\Google ドライブ\00-share\MT4\GBPJPY60.csv"
-
+        Workbooks.Open "C:\Users\User\Google ドライブ\MT4\GBPJPY60.csv"
 
 End Sub
 Sub FX_tool_main()
@@ -40,17 +38,14 @@ Function 買い(ByVal n As Long)
         Dim Tokyo_market_high_price As Double
         Dim Europe_1_hour_value As Double
         Dim European_closing_price As Double
-        Dim t_13_hours_a_day As Long
-        t_13_hours_a_day = 13
-
         
+        Dim SETTLEMENT_TIME_SEQUENCE As Long
+        SETTLEMENT_TIME_SEQUENCE = 13  '対象日数
+       
         Dim Days_index As Long
-        Days_index = (n * t_13_hours_a_day) '日数×１日の対象行数を示す。
-        
-        Dim Settlement_time_sequence As Long
-        Settlement_time_sequence = 13  '対象日数
-        
-        European_closing_price = Range("f" & (Settlement_time_sequence + Days_index)).Value
+        Days_index = (n * SETTLEMENT_TIME_SEQUENCE) '日数×１日の対象行数を示す。
+
+        European_closing_price = Range("f" & (SETTLEMENT_TIME_SEQUENCE + Days_index)).Value
         
         Dim Break_judgment_value As Integer  '（１：ブレークなし。２：ブレークあり。３：ブレーク損切）
         Break_judgment_value = 1  'ブレークなし
@@ -58,9 +53,9 @@ Function 買い(ByVal n As Long)
         Tokyo_market_high_price = WorksheetFunction.Max(Range("d" & 1 + Days_index & ":d" & 6 + Days_index))
         
         '東京市場の高値をブレークブレークする行を検索し、グラグ２（ブレークあり）を設定する。
-        For i = 1 + Days_index To Settlement_time_sequence + Days_index    '15時から２２時まで
+        For i = 1 + Days_index To SETTLEMENT_TIME_SEQUENCE + Days_index    '15時から２２時まで
             
-                Europe_1_hour_value = CDbl(Range("f" & i).Value)
+                Europe_1_hour_value = CDbl(Range("E" & i).Value)
         
                 If Europe_1_hour_value > Tokyo_market_high_price Then
                 
@@ -78,7 +73,8 @@ Function 買い(ByVal n As Long)
         Next i
         
         'ブレーク後、損切り判定を行い、Xpipsでフラグ３（ブレーク損切）を設定する。
-        For i2 = i To Settlement_time_sequence + Days_index
+        For i2 = i To SETTLEMENT_TIME_SEQUENCE + Days_index
+        
                 Europe_1_hour_value = CDbl(Range("f" & i2).Value)
 
                 If ((Europe_1_hour_value - Tokyo_market_high_price) * 100) < STOP_LOSS Then
@@ -92,7 +88,7 @@ Function 買い(ByVal n As Long)
         '判定結果を２２時のG列に書き込む
         If Break_judgment_value = 1 Then
                 'トレード無し
-                Range("g" & Settlement_time_sequence + Days_index).Value = 0
+                Range("g" & SETTLEMENT_TIME_SEQUENCE + Days_index).Value = 0
         ElseIf Break_judgment_value = 2 Then
         
                 Dim a As Long
@@ -102,13 +98,13 @@ Function 買い(ByVal n As Long)
         
                 'ブレーク後の決済
                 '
-               'Range("g" & Settlement_time_sequence + Days_index).Value = (European_closing_price - Tokyo_market_high_price) * 100
+               'Range("g" & SETTLEMENT_TIME_SEQUENCE + Days_index).Value = (European_closing_price - Tokyo_market_high_price) * 100
                 
-                Range("g" & Settlement_time_sequence + Days_index).Value = (European_closing_price - Tokyo_market_high_price - a) * 100
+                Range("g" & SETTLEMENT_TIME_SEQUENCE + Days_index).Value = (European_closing_price - Tokyo_market_high_price - a) * 100
                 
         ElseIf Break_judgment_value = 3 Then
                 'ブレーク後の損切り
-                Range("g" & Settlement_time_sequence + Days_index).Value = STOP_LOSS
+                Range("g" & SETTLEMENT_TIME_SEQUENCE + Days_index).Value = STOP_LOSS
         End If
 
 End Function
@@ -118,19 +114,14 @@ Function 売り(ByVal n As Long)
         Dim Europe_1_hour_value As Double
         Dim European_closing_price As Double
         
-        
-        Dim t_13_hours_a_day As Long
-        t_13_hours_a_day = 13
+        Dim SETTLEMENT_TIME_SEQUENCE As Long
+        SETTLEMENT_TIME_SEQUENCE = 13 '対象日数
         
         Dim Days_index As Long
-        Days_index = (n * t_13_hours_a_day)
+        Days_index = (n * SETTLEMENT_TIME_SEQUENCE)
         
-        Dim Settlement_time_sequence As Long
-        Settlement_time_sequence = 13 '対象日数
-
-        
-        
-        European_closing_price = Range("f" & (Settlement_time_sequence + Days_index)).Value
+       
+        European_closing_price = Range("f" & (SETTLEMENT_TIME_SEQUENCE + Days_index)).Value
         
         Dim Break_judgment_value As Integer  '（１：ブレークなし。２：ブレークあり。３：ブレーク損切）
         
@@ -139,7 +130,7 @@ Function 売り(ByVal n As Long)
         Tokyo_market_low = WorksheetFunction.Min(Range("e" & 1 + Days_index & ":e" & 6 + Days_index))
         
         '東京市場　安値　ブレーク
-        For i = 1 + Days_index To Settlement_time_sequence + Days_index
+        For i = 1 + Days_index To SETTLEMENT_TIME_SEQUENCE + Days_index
             
                 Europe_1_hour_value = CDbl(Range("f" & i).Value)
         
@@ -151,8 +142,8 @@ Function 売り(ByVal n As Long)
         Next i
         
         '東京市場　安値　損切り
-        For i2 = i To Settlement_time_sequence + Days_index   'ブレーク後の損切り判定
-                Europe_1_hour_value = CDbl(Range("f" & i2).Value)
+        For i2 = i To SETTLEMENT_TIME_SEQUENCE + Days_index   'ブレーク後の損切り判定
+                Europe_1_hour_value = CDbl(Range("D" & i2).Value)
         
                 If ((Tokyo_market_low - Europe_1_hour_value) * 100) < STOP_LOSS Then
                         Break_judgment_value = 3
@@ -163,13 +154,13 @@ Function 売り(ByVal n As Long)
         '判定結果を２２時のG列に書き込む
         If Break_judgment_value = 1 Then
                 'トレード無し
-                Range("h" & Settlement_time_sequence + Days_index).Value = 0
+                Range("h" & SETTLEMENT_TIME_SEQUENCE + Days_index).Value = 0
         ElseIf Break_judgment_value = 2 Then
                 'ブレーク後の決済
-                Range("h" & Settlement_time_sequence + Days_index).Value = (Tokyo_market_low - European_closing_price) * 100
+                Range("h" & SETTLEMENT_TIME_SEQUENCE + Days_index).Value = (Tokyo_market_low - European_closing_price) * 100
         ElseIf Break_judgment_value = 3 Then
                 'ブレーク後の損切り
-                Range("h" & Settlement_time_sequence + Days_index).Value = STOP_LOSS
+                Range("h" & SETTLEMENT_TIME_SEQUENCE + Days_index).Value = STOP_LOSS
         End If
 
 End Function
