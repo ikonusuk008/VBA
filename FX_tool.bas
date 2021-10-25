@@ -9,23 +9,20 @@ Sub Eopen()
 End Sub
 Sub FX_tool_main()
 
-        'TODO　自動で開いて書き込む。開いている場合は、閉じて実行する。
-        'Workbooks.Open "C:\Users\User\Google ドライブ\00-share\MT4\GBPJPY60.csv"
-
         extract_2200_of_13H '対象外の時間の行を削除する。
 
-        日に13行が含まれていなければ､その日は対象外として削除する '対象時間が欠けている日の行は削除する｡
+        If_a_day_does_not_contain_13_lines_that_day_is_excluded_and_deleted '対象時間が欠けている日の行は削除する｡
         
         Debug.Print "Start Input BUY and SELL"
             
-        '最終行--------------------------------
+        'Last_line
         Dim xlLastRow As Long
         Dim end_r As Long
         xlLastRow = Cells(Rows.Count, 1).Row
-        end_r = Cells(xlLastRow, 1).End(xlUp).Row
-        '--------------------------------最終
-
-        For n = 0 To end_r \ 13
+        Last_line = Cells(xlLastRow, 1).End(xlUp).Row
+        
+        
+        For n = 0 To Last_line \ 13
                 買い (n)
                 売り (n)
         Next n
@@ -58,14 +55,9 @@ Function 買い(ByVal n As Long)
                 Europe_1_hour_value = CDbl(Range("E" & i).Value)
         
                 If Europe_1_hour_value > Tokyo_market_high_price Then
-                
-            
-                        'ここで更に、東京市場高値で買いができた場合　という条件が必要。・・・①
-                        'または、東京市場高値より、Xpips（最適解が必要）下がった時、という条件が必要。・・・②
-                        'または、そのまま、東京市場高値を超えた終値から計算する。・・・③
                         
-                        '調査
-                        '１H終値のブレークが必要か。東京市場Xpipsブレークでいいのではないか。
+                        'TODO
+                        '１H終値のブレークしない場合は、Wブレークになるケースが存在する。
                 
                         Break_judgment_value = 2
                         Exit For
@@ -164,9 +156,9 @@ Function 売り(ByVal n As Long)
         End If
 
 End Function
-Sub 日に13行が含まれていなければ､その日は対象外として削除する()
+Sub If_a_day_does_not_contain_13_lines_that_day_is_excluded_and_deleted()
 
-        Debug.Print "END 日に13行が含まれていなければ､その日は対象外として削除する"
+        Debug.Print "END If_a_day_does_not_contain_13_lines,_that_day_is_excluded_and_deleted"
 
         Dim Last_line As Long
         Last_line = Cells(Rows.Count, 1).End(xlUp).Row
@@ -213,7 +205,7 @@ Sub 日に13行が含まれていなければ､その日は対象外として削除する()
                 Next i
        Next EVERYDAY
        
-       Debug.Print "END 日に13行が含まれていなければ､その日は対象外として削除する"
+       Debug.Print "END If_a_day_does_not_contain_13_lines,_that_day_is_excluded_and_deleted"
       
 End Sub
 Sub extract_2200_of_13H()
@@ -306,4 +298,11 @@ Sub prepare_pibot_table()
     Range("A1:H1").Select
     Range(Selection, Selection.End(xlDown)).Select
     
+End Sub
+Sub Wブレークの出現回数をカウントする()
+
+        '東京市場のブレークが高値のみの場合、Wブレークになるケースが有る。
+        '
+
+
 End Sub
