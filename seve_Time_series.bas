@@ -9,7 +9,6 @@ Sub seve_Time_series_main()
   
   Dim TargetFilePath As String
   TargetFilePath = ActiveWorkbook.FullName
- 
   
   Dim save_destination As String
   save_destination = backupFolderPath & objFSO.GetBaseName(TargetFilePath) + Format(Date, "_eemmdd-") + Format(Time, "hhmmss.") + objFSO.GetExtensionName(TargetFilePath)
