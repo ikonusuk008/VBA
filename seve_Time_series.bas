@@ -1,5 +1,6 @@
 Attribute VB_Name = "seve_Time_series"
 Sub seve_Time_series_main()
+Attribute seve_Time_series_main.VB_ProcData.VB_Invoke_Func = "b\n14"
 
   Dim objFSO As Object, txtSource As String, txtDestination
   Set objFSO = CreateObject("Scripting.FileSystemObject")
@@ -18,6 +19,8 @@ Sub seve_Time_series_main()
   GetExtensionName = objFSO.GetExtensionName(TargetFilePath)
 
   objFSO.CopyFile TargetFilePath, save_destination
+  
+  MsgBox "時系列保存しました。" & vbCrLf & "！！！！！"
 
 End Sub
 
