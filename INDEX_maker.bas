@@ -1,5 +1,6 @@
 Attribute VB_Name = "INDEX_maker"
 Sub INDEX_maker_main()
+Attribute INDEX_maker_main.VB_ProcData.VB_Invoke_Func = "u\n14"
    
     Dim sheetCount As Integer
     Dim j As Integer
@@ -78,6 +79,10 @@ Sub INDEX_maker_main()
     Cells.EntireColumn.AutoFit
     Range("A1").Select
     FreezePanes
+    
+    ActiveWorkbook.Save
+    
+    seve_Time_series_main
     
 End Sub
 

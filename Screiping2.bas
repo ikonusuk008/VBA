@@ -1,5 +1,5 @@
-Attribute VB_Name = "Scleiping"
-Sub Scraiping2()
+Attribute VB_Name = "Screiping2"
+Sub Scraiping1()
     'Dim driver As New Selenium.ChromeDriver
     Dim driver As New Selenium.PhantomJSDriver
     Dim elmDoc     As WebElement
@@ -36,40 +36,48 @@ Sub Scraiping2()
                         
 End Sub
 Sub Scraiping2()
+Attribute Scraiping2.VB_ProcData.VB_Invoke_Func = "j\n14"
 
     'https://kawattawatta.com/it/vba-web-scraping-with-google-chrome-and-selenium/
-    
+
+    ActiveSheet.Hyperlinks.Add Anchor:=ActiveCell, Address:=ActiveCell.Value
     
     Dim driver As New Selenium.PhantomJSDriver
-    
     
     With driver
         .Start
         .Get ActiveCell.Value
         
-        Cells(ActiveCell.Row, ActiveCell.Column - 1) = driver.Window.Title
+        Cells(ActiveCell.Row, ActiveCell.Column + 1) = driver.Window.Title
 
 
 
     End With
     
 End Sub
-Sub Scraiping3()
+Sub ScraipingLIST()
     'https://kawattawatta.com/it/vba-web-scraping-with-google-chrome-and-selenium/
     
     
     Dim driver As New Selenium.PhantomJSDriver
     
     
-    With driver
-        .Start
-        .Get ActiveCell.Value
+    For i = 2 To Cells(Cells(Rows.Count, 2).Row, 2).End(xlUp).Row
+    
+    
+        With driver
+            .Start
+            .Get Range("B" & i).Value
+            
+            Range("A" & i).Value = driver.Window.Title
+    
+    
+        End With
         
-        Cells(ActiveCell.Row, ActiveCell.Column - 1) = driver.Window.Title
-
-
-
-    End With
+        driver.Wait 3000
+    
+    
+    Next i
     
 End Sub
 
