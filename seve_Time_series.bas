@@ -15,11 +15,5 @@ Attribute seve_Time_series_main.VB_ProcData.VB_Invoke_Func = "b\n14"
     GetExtensionName = objFSO.GetExtensionName(TargetFilePath)
     objFSO.CopyFile TargetFilePath, save_destination
     
-    Dim WSH As Object
-    Set WSH = CreateObject("WScript.Shell")
-    WSH.Popup "ï€ë∂äÆóπÅI", 1, "Title", vbInformation
-    Set WSH = Nothing
     
 End Sub
-
-

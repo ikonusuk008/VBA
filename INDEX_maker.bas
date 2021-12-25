@@ -79,9 +79,7 @@ Attribute INDEX_maker_main.VB_ProcData.VB_Invoke_Func = "u\n14"
     Cells.EntireColumn.AutoFit
     Range("A1").Select
     FreezePanes
-    
-    ActiveWorkbook.Save
-    
+        
     seve_Time_series_main
     
 End Sub
