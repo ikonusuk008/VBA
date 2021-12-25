@@ -77,12 +77,23 @@ Columns(ActiveCell.Column).Insert
   
 End Sub
 Sub 行の高さ自動調整_Automatic_row_height_adjustment()
+Attribute 行の高さ自動調整_Automatic_row_height_adjustment.VB_ProcData.VB_Invoke_Func = "t\n14"
 '
 ' Automatic_row_height_adjustment
 '
     Cells.Select
     Cells.EntireRow.AutoFit
     Range("A1").Select
+End Sub
+Sub アクティブセルの改行と空白を排除する_Eliminate_line_breaks_and_blanks_in_the_active_Cell()
+  
+    a = ActiveCell
+    b = Replace(a, vbLf, "")
+    b = Replace(b, " ", "")
+    b = Replace(b, "　", "")
+    
+    ActiveCell = b
+      
 End Sub
 
 
