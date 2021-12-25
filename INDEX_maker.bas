@@ -82,6 +82,8 @@ Attribute INDEX_maker_main.VB_ProcData.VB_Invoke_Func = "u\n14"
         
     seve_Time_series_main
     
+    zoom_main
+    
 End Sub
 
 Sub FreezePanes()
@@ -110,6 +112,35 @@ Public Function ExistsWorksheet(ByVal name As String)
     ExistsWorksheet = False
     
 End Function
+Sub zoom_main()
+
+    
+    For i = 1 To Worksheets.Count
+    
+        Worksheets(i).Select
+        ActiveWindow.zoom = "90"
+        Range("a1").Select
+        previewFlag = 1
+        
+        If previewFlag = 1 Then
+            ActiveWindow.View = xlNormalView
+        Else
+            ActiveWindow.View = xlPageBreakPreview
+        End If
+         
+        Cells.Select
+    
+        Cells.Font.name = "ÉÅÉCÉäÉI"
+        
+        
+        Range("a1").Select
+        
+    Next i
+    
+    Worksheets(1).Select
+    
+    
+End Sub
 
 
 
