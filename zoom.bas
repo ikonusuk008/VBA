@@ -16,6 +16,11 @@ Sub zoom_main()
         Else
             ActiveWindow.View = xlPageBreakPreview
         End If
+         
+        Cells.Select
+    
+        Cells.Font.name = "ƒƒCƒŠƒI"
+        
         
     Next i
     

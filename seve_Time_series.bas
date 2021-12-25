@@ -1,6 +1,6 @@
 Attribute VB_Name = "seve_Time_series"
-
 Sub seve_Time_series_main()
+Attribute seve_Time_series_main.VB_ProcData.VB_Invoke_Func = "b\n14"
 
     ActiveWorkbook.Save
     Dim objFSO As Object, txtSource As String, txtDestination
@@ -14,7 +14,11 @@ Sub seve_Time_series_main()
     Dim GetExtensionName As String
     GetExtensionName = objFSO.GetExtensionName(TargetFilePath)
     objFSO.CopyFile TargetFilePath, save_destination
-    MsgBox "éûånóÒï€ë∂ÇµÇ‹ÇµÇΩÅB" & vbCrLf & "ÅI"
+    
+    Dim WSH As Object
+    Set WSH = CreateObject("WScript.Shell")
+    WSH.Popup "ï€ë∂äÆóπÅI", 1, "Title", vbInformation
+    Set WSH = Nothing
     
 End Sub
 
