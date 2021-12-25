@@ -44,15 +44,47 @@ Attribute insert_row_on_active_cell.VB_ProcData.VB_Invoke_Func = "y\n14"
     Next i
     
 End Sub
-
-
-
-Sub Macro7()
-Attribute Macro7.VB_ProcData.VB_Invoke_Func = " \n14"
+Sub One_row_delete()
+Attribute One_row_delete.VB_ProcData.VB_Invoke_Func = "p\n14"
 '
-' Macro7 Macro
-'
+ActiveCell.EntireRow.Select
 
-'
-    
+Rows(ActiveCell.Row).Delete
+  
 End Sub
+Sub One_row_insert()
+Attribute One_row_insert.VB_ProcData.VB_Invoke_Func = "i\n14"
+'
+ActiveCell.EntireRow.Select
+
+Rows(ActiveCell.Row).Insert
+  
+End Sub
+Sub One_Columun_delete()
+Attribute One_Columun_delete.VB_ProcData.VB_Invoke_Func = "P\n14"
+'
+ActiveCell.EntireColumn.Select
+
+Columns(ActiveCell.Column).Delete
+  
+End Sub
+Sub One_Columun_insert()
+Attribute One_Columun_insert.VB_ProcData.VB_Invoke_Func = "I\n14"
+'
+ActiveCell.EntireColumn.Select
+
+Columns(ActiveCell.Column).Insert
+  
+End Sub
+Sub çsÇÃçÇÇ≥é©ìÆí≤êÆ_Automatic_row_height_adjustment()
+'
+' Automatic_row_height_adjustment
+'
+    Cells.Select
+    Cells.EntireRow.AutoFit
+    Range("A1").Select
+End Sub
+
+
+
+
