@@ -86,16 +86,26 @@ Attribute 行の高さ自動調整_Automatic_row_height_adjustment.VB_ProcData.VB_Invoke
     Range("A1").Select
 End Sub
 Sub アクティブセルの改行と空白を排除する_Eliminate_line_breaks_and_blanks_in_the_active_Cell()
+Attribute アクティブセルの改行と空白を排除する_Eliminate_line_breaks_and_blanks_in_the_active_Cell.VB_ProcData.VB_Invoke_Func = "Q\n14"
   
     a = ActiveCell
     b = Replace(a, vbLf, "")
     b = Replace(b, " ", "")
-    b = Replace(b, "　", "")
     
     ActiveCell = b
       
 End Sub
+Sub テンプレートシートをコピーして当日のシートを作成する()
+'
+' テンプレートシートをコピーして当日のシートを作成する Macro
+' Copy the template sheet to create the sheet for the day.
 
+    sheets("T").Select
+    sheets("T").Copy Before:=sheets(4)
+    sheets("T (2)").Select
+    sheets("T (2)").name = Format(Date, "（mmdd")
+    
+End Sub
 
 
 
