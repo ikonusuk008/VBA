@@ -22,8 +22,12 @@ Sub zoom_main()
         Cells.Font.name = "ƒƒCƒŠƒI"
         
         
+        Range("a1").Select
+        
     Next i
     
     Worksheets(1).Select
+    
+    
     
 End Sub
