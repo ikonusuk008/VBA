@@ -62,7 +62,7 @@ Rows(ActiveCell.Row).Insert
 End Sub
 Sub One_Columun_delete()
 Attribute One_Columun_delete.VB_ProcData.VB_Invoke_Func = "P\n14"
-'
+
 ActiveCell.EntireColumn.Select
 
 Columns(ActiveCell.Column).Delete
@@ -95,18 +95,8 @@ Attribute アクティブセルの改行と空白を排除する_Eliminate_line_breaks_and_blanks_
     ActiveCell = b
       
 End Sub
+Sub シートの経過時間が0分ならば行を削除する()
 
-'Private Sub Worksheet_Activate()
-'
-'    Dim last_row As Long
-'    last_row = ThisWorkbook.Worksheets("TIME").Cells(Rows.Count, 1).End(xlUp).Row
-'    ThisWorkbook.Worksheets("TIME").Range("A" & last_row + 1).Value = ActiveSheet.name
-'    ThisWorkbook.Worksheets("TIME").Range("B" & last_row + 1).Value = Format(Time, "hh:mm")
-'    ThisWorkbook.Worksheets("TIME").Range("C" & last_row + 1).Value = DateDiff("n", Format(ThisWorkbook.Worksheets("TIME").Range("B" & last_row).Value, "hh:mm"), Format(Time, "hh:mm"))
-'
-'End Sub
-
-
-
-
-
+    
+    Range("P4").Select
+End Sub
