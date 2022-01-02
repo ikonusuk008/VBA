@@ -1,6 +1,6 @@
 Attribute VB_Name = "Tools1"
-Sub insert_row_on_active_cell()
-Attribute insert_row_on_active_cell.VB_ProcData.VB_Invoke_Func = "y\n14"
+Sub 日付を付けた行を追加する_insert_row_on_active_cell()
+Attribute 日付を付けた行を追加する_insert_row_on_active_cell.VB_ProcData.VB_Invoke_Func = "y\n14"
     '日付を付けた行を追加する。
     '　毎日作業のシートを対象
     
@@ -26,8 +26,6 @@ Attribute insert_row_on_active_cell.VB_ProcData.VB_Invoke_Func = "y\n14"
             ActiveCell.EntireRow.Font.Bold = False
             
             
-            
-            
             '選択した行の色をクリア。
             ActiveCell.EntireRow.Interior.colorIndex = 0
             '選択したセルに　本日の
@@ -42,6 +40,8 @@ Attribute insert_row_on_active_cell.VB_ProcData.VB_Invoke_Func = "y\n14"
         End If
         
     Next i
+    
+    行の高さ自動調整_Automatic_row_height_adjustment
     
 End Sub
 Sub One_row_delete()
@@ -84,6 +84,7 @@ Attribute 行の高さ自動調整_Automatic_row_height_adjustment.VB_ProcData.VB_Invoke
     Cells.Select
     Cells.EntireRow.AutoFit
     Range("A1").Select
+    
 End Sub
 Sub アクティブセルの改行と空白を排除する_Eliminate_line_breaks_and_blanks_in_the_active_Cell()
 Attribute アクティブセルの改行と空白を排除する_Eliminate_line_breaks_and_blanks_in_the_active_Cell.VB_ProcData.VB_Invoke_Func = "Q\n14"
@@ -128,10 +129,6 @@ Sub ショートカット一覧の取得_GetShortCutKeys()
 'アクティブセルの改行と空白を排除する_Eliminate_line_breaks_and_blanks_in_the_active_Cell() : Ctrl +　Q
 'シートの経過時間が0分ならば行を削除する() : Ctrl +
 'アクティブセルの下のセルをコピーする() : Ctrl +　q
-
-
-
-
 
 
 Dim DefPath As String
