@@ -15,5 +15,24 @@ Attribute seve_Time_series_main.VB_ProcData.VB_Invoke_Func = "b\n14"
     GetExtensionName = objFSO.GetExtensionName(TargetFilePath)
     objFSO.CopyFile TargetFilePath, save_destination
     
+   
+
+    For i = 1 To Worksheets.Count
     
+        Worksheets(i).Select
+        ActiveWindow.zoom = 90
+        Range("a1").Select
+        previewFlag = 1
+        
+        If previewFlag = 1 Then
+            ActiveWindow.View = xlNormalView
+        Else
+            ActiveWindow.View = xlPageBreakPreview
+        End If
+        
+    Next i
+    
+    Worksheets(1).Select
+
+
 End Sub
