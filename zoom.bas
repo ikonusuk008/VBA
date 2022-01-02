@@ -16,9 +16,18 @@ Sub zoom_main()
         Else
             ActiveWindow.View = xlPageBreakPreview
         End If
+         
+        Cells.Select
+    
+        Cells.Font.name = "ÉÅÉCÉäÉI"
+        
+        
+        Range("a1").Select
         
     Next i
     
     Worksheets(1).Select
+    
+    
     
 End Sub

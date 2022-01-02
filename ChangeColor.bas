@@ -2,12 +2,13 @@ Attribute VB_Name = "ChangeColor"
 Sub ChangeColor_main()
 
     Dim rng As Range
+    
     Dim ptr As Integer
     
     Const dataType As Long = 23 '23:When "Numeric value", "Character", "Logical value", and "Error value" are all selected
     
     Dim colorChangeText As String
-    colorChangeText = InputBox("imput text")
+    colorChangeText = InputBox("text")
     
     Dim colorIndex As String
     colorIndex = InputBox("imput color", "3", "3")
