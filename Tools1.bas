@@ -40,8 +40,7 @@ Attribute 日付を付けた行を追加する_insert_row_on_active_cell.VB_ProcData.VB_Invo
         End If
         
     Next i
-    
-    行の高さ自動調整_Automatic_row_height_adjustment
+   
     
 End Sub
 Sub One_row_delete()
