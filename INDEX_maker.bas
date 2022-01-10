@@ -38,7 +38,7 @@ Attribute INDEX_maker_main.VB_ProcData.VB_Invoke_Func = "u\n14"
     
         worksheetName = Worksheets(i).name
         
-        If Mid(worksheetName, 1, 1) = "-" Then
+        If Mid(worksheetName, 1, 1) = "Åy" Then
             j = 1
             ASCII = ASCII + 1
         End If
