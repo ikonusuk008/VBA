@@ -1,14 +1,13 @@
 Attribute VB_Name = "INDEX_maker"
 Sub INDEX_maker_main()
-    'Summary
-    'This program creates a table of contents sheet.
+Attribute INDEX_maker_main.VB_ProcData.VB_Invoke_Func = "u\n14"
    
     Dim sheetCount As Integer
     Dim j As Integer
     Dim ASCII As Integer
     Dim worksheetName As String
     Dim subAddress_ As String
-    Dim worksheet As worksheet
+    Dim Worksheet As Worksheet
 
     ASCII = 65
     j = 2
@@ -35,8 +34,6 @@ Sub INDEX_maker_main()
     Range("A1").Activate
     ActiveCell.Value = sheetCount & "Sheet"
     
-
-    'Get sheet information and write to INDEX sheet.
     For i = 2 To sheetCount
     
         worksheetName = Worksheets(i).name
@@ -82,6 +79,8 @@ Sub INDEX_maker_main()
     Cells.EntireColumn.AutoFit
     Range("A1").Select
     FreezePanes
+        
+    seve_Time_series_main
     
 End Sub
 
@@ -97,7 +96,7 @@ Sub FreezePanes()
 End Sub
 Public Function ExistsWorksheet(ByVal name As String)
 
-    Dim ws As worksheet
+    Dim ws As Worksheet
     
     For Each ws In sheets
     
