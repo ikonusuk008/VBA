@@ -2,24 +2,24 @@ Attribute VB_Name = "Tools1"
 Sub Insert_todays_row_in_the_date_column()
 Attribute Insert_todays_row_in_the_date_column.VB_ProcData.VB_Invoke_Func = "y\n14"
 
-    '“ú•t‚ğ•t‚¯‚½s‚ğ’Ç‰Á‚·‚éB
-    '@–ˆ“úì‹Æ‚ÌƒV[ƒg‚ğ‘ÎÛ
+    'æ—¥ä»˜ã‚’ä»˜ã‘ãŸè¡Œã‚’è¿½åŠ ã™ã‚‹ã€‚
+    'ã€€æ¯æ—¥ä½œæ¥­ã®ã‚·ãƒ¼ãƒˆã‚’å¯¾è±¡
     
     For i = 1 To 10
         
-        If Range("a" & i).Value = "“ú•t" Or _
-        Range("a" & i).Value = "“ú•t" _
+        If Range("a" & i).Value = "æ—¥ä»˜" Or _
+        Range("a" & i).Value = "æ—¥ä»˜" _
  _
         Then
         
             Range("a" & i + 1).Select
-            'ƒAƒNƒeƒBƒuƒZƒ‹‚Ìã‚És‚ğ’Ç‰Á‚·‚éB
+            'ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚»ãƒ«ã®ä¸Šã«è¡Œã‚’è¿½åŠ ã™ã‚‹ã€‚
             Rows(ActiveCell.Row).Insert
-            '’Ç‰Á‚µ‚½s‚ğ‘I‘ğ‚·‚é
+            'è¿½åŠ ã—ãŸè¡Œã‚’é¸æŠã™ã‚‹
             ActiveCell.EntireRow.Select
             
             
-            ActiveCell.EntireRow.Font.Color = vbBlack '•
+            ActiveCell.EntireRow.Font.Color = vbBlack 'é»’
             
             ActiveCell.EntireRow.HorizontalAlignment = xlLeft
             ActiveCell.EntireRow.VerticalAlignment = xlTop
@@ -29,9 +29,9 @@ Attribute Insert_todays_row_in_the_date_column.VB_ProcData.VB_Invoke_Func = "y\n
             
             
             
-            '‘I‘ğ‚µ‚½s‚ÌF‚ğƒNƒŠƒAB
+            'é¸æŠã—ãŸè¡Œã®è‰²ã‚’ã‚¯ãƒªã‚¢ã€‚
             ActiveCell.EntireRow.Interior.colorIndex = 0
-            '‘I‘ğ‚µ‚½ƒZƒ‹‚É@–{“ú‚Ì“ú•t‚ğ“ü—Í
+            'é¸æŠã—ãŸã‚»ãƒ«ã«ã€€æœ¬æ—¥ã®æ—¥ä»˜ã‚’å…¥åŠ›
             ActiveCell.Value = Date
             ActiveCell.End(xlToLeft).Select
             
@@ -79,8 +79,8 @@ ActiveCell.EntireColumn.Select
 Columns(ActiveCell.Column).Insert
   
 End Sub
-Sub s‚Ì‚‚³©“®’²®_Automatic_row_height_adjustment()
-Attribute s‚Ì‚‚³©“®’²®_Automatic_row_height_adjustment.VB_ProcData.VB_Invoke_Func = "t\n14"
+Sub è¡Œã®é«˜ã•è‡ªå‹•èª¿æ•´_Automatic_row_height_adjustment()
+Attribute è¡Œã®é«˜ã•è‡ªå‹•èª¿æ•´_Automatic_row_height_adjustment.VB_ProcData.VB_Invoke_Func = "t\n14"
 '
 ' Automatic_row_height_adjustment
 '
@@ -88,8 +88,8 @@ Attribute s‚Ì‚‚³©“®’²®_Automatic_row_height_adjustment.VB_ProcData.VB_Invoke
     Cells.EntireRow.AutoFit
     Range("A1").Select
 End Sub
-Sub ƒAƒNƒeƒBƒuƒZƒ‹‚Ì‰üs‚Æ‹ó”’‚ğ”rœ‚·‚é_Eliminate_line_breaks_and_blanks_in_the_active_Cell()
-Attribute ƒAƒNƒeƒBƒuƒZƒ‹‚Ì‰üs‚Æ‹ó”’‚ğ”rœ‚·‚é_Eliminate_line_breaks_and_blanks_in_the_active_Cell.VB_ProcData.VB_Invoke_Func = "Q\n14"
+Sub ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚»ãƒ«ã®æ”¹è¡Œã¨ç©ºç™½ã‚’æ’é™¤ã™ã‚‹_Eliminate_line_breaks_and_blanks_in_the_active_Cell()
+Attribute ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚»ãƒ«ã®æ”¹è¡Œã¨ç©ºç™½ã‚’æ’é™¤ã™ã‚‹_Eliminate_line_breaks_and_blanks_in_the_active_Cell.VB_ProcData.VB_Invoke_Func = "Q\n14"
   
     a = ActiveCell
     b = Replace(a, vbLf, "")
@@ -98,38 +98,38 @@ Attribute ƒAƒNƒeƒBƒuƒZƒ‹‚Ì‰üs‚Æ‹ó”’‚ğ”rœ‚·‚é_Eliminate_line_breaks_and_blanks_
     ActiveCell = b
       
 End Sub
-Sub ƒV[ƒg‚ÌŒo‰ßŠÔ‚ª0•ª‚È‚ç‚Îs‚ğíœ‚·‚é()
-Attribute ƒV[ƒg‚ÌŒo‰ßŠÔ‚ª0•ª‚È‚ç‚Îs‚ğíœ‚·‚é.VB_ProcData.VB_Invoke_Func = " \n14"
-    'ì‹Æ’†
+Sub ã‚·ãƒ¼ãƒˆã®çµŒéæ™‚é–“ãŒ0åˆ†ãªã‚‰ã°è¡Œã‚’å‰Šé™¤ã™ã‚‹()
+Attribute ã‚·ãƒ¼ãƒˆã®çµŒéæ™‚é–“ãŒ0åˆ†ãªã‚‰ã°è¡Œã‚’å‰Šé™¤ã™ã‚‹.VB_ProcData.VB_Invoke_Func = " \n14"
+    'ä½œæ¥­ä¸­
     
     
 End Sub
-Sub ƒAƒNƒeƒBƒuƒZƒ‹‚Ì‰º‚ÌƒZƒ‹‚ğƒRƒs[‚·‚é()
-Attribute ƒAƒNƒeƒBƒuƒZƒ‹‚Ì‰º‚ÌƒZƒ‹‚ğƒRƒs[‚·‚é.VB_ProcData.VB_Invoke_Func = "q\n14"
+Sub ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚»ãƒ«ã®ä¸‹ã®ã‚»ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹()
+Attribute ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚»ãƒ«ã®ä¸‹ã®ã‚»ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹.VB_ProcData.VB_Invoke_Func = "q\n14"
     
     ActiveCell.Cells(1, 1).Value = ActiveCell.Cells(2, 1).Value
    
     
 End Sub
 '-------------------------------------------
-Sub ƒVƒ‡[ƒgƒJƒbƒgˆê——‚Ìæ“¾_GetShortCutKeys()
-'Œ»İ‚Ìİ’è‚ÍA©ƒuƒbƒN‚ÉŒÀ‚é
+Sub ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆä¸€è¦§ã®å–å¾—_GetShortCutKeys()
+'ç¾åœ¨ã®è¨­å®šã¯ã€è‡ªãƒ–ãƒƒã‚¯ã«é™ã‚‹
 
-'INDEX_maker_main() : Ctrl +@u
-'seve_Time_series_main() : Ctrl +@b
-'ToIndex_main() : Ctrl +@l
+'INDEX_maker_main() : Ctrl +ã€€u
+'seve_Time_series_main() : Ctrl +ã€€b
+'ToIndex_main() : Ctrl +ã€€l
 'extract_13H_between_0300to1500() : Ctrl +
-'Get_final_balance() : Ctrl +@q
-'Scraiping2() : Ctrl +@j
-'insert_row_on_active_cell() : Ctrl +@y
-'One_row_delete() : Ctrl +@p
-'One_row_insert() : Ctrl +@i
-'One_Columun_delete() : Ctrl +@P
-'One_Columun_insert() : Ctrl +@I
-'s‚Ì‚‚³©“®’²®_Automatic_row_height_adjustment() : Ctrl +@t
-'ƒAƒNƒeƒBƒuƒZƒ‹‚Ì‰üs‚Æ‹ó”’‚ğ”rœ‚·‚é_Eliminate_line_breaks_and_blanks_in_the_active_Cell() : Ctrl +@Q
-'ƒV[ƒg‚ÌŒo‰ßŠÔ‚ª0•ª‚È‚ç‚Îs‚ğíœ‚·‚é() : Ctrl +
-'ƒAƒNƒeƒBƒuƒZƒ‹‚Ì‰º‚ÌƒZƒ‹‚ğƒRƒs[‚·‚é() : Ctrl +@q
+'Get_final_balance() : Ctrl +ã€€q
+'Scraiping2() : Ctrl +ã€€j
+'insert_row_on_active_cell() : Ctrl +ã€€y
+'One_row_delete() : Ctrl +ã€€p
+'One_row_insert() : Ctrl +ã€€i
+'One_Columun_delete() : Ctrl +ã€€P
+'One_Columun_insert() : Ctrl +ã€€I
+'è¡Œã®é«˜ã•è‡ªå‹•èª¿æ•´_Automatic_row_height_adjustment() : Ctrl +ã€€t
+'ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚»ãƒ«ã®æ”¹è¡Œã¨ç©ºç™½ã‚’æ’é™¤ã™ã‚‹_Eliminate_line_breaks_and_blanks_in_the_active_Cell() : Ctrl +ã€€Q
+'ã‚·ãƒ¼ãƒˆã®çµŒéæ™‚é–“ãŒ0åˆ†ãªã‚‰ã°è¡Œã‚’å‰Šé™¤ã™ã‚‹() : Ctrl +
+'ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚»ãƒ«ã®ä¸‹ã®ã‚»ãƒ«ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹() : Ctrl +ã€€q
 
 Dim DefPath As String
 Dim FNo As Integer
@@ -156,10 +156,10 @@ DefPath = ThisWorkbook.path & "\"
     End If
     If InStr(LineBuf, AT1) = 1 And InStr(LineBuf, AT2) > 0 Then
      ReDim Preserve buf(i)
-      bufKeyName = " : Ctrl +@" & Mid$(LineBuf, InStrRev(LineBuf, "=") + 3, 1)
-      buf(i) = bufName & bufKeyName  '”z—ño—Í
+      bufKeyName = " : Ctrl +ã€€" & Mid$(LineBuf, InStrRev(LineBuf, "=") + 3, 1)
+      buf(i) = bufName & bufKeyName  'é…åˆ—å‡ºåŠ›
    
-      'Debug.Print‚Ö"
+      'Debug.Printã¸"
       'Debug.Print bufName; bufKeyName
       i = i + 1
       bufName = ""
@@ -172,6 +172,17 @@ DefPath = ThisWorkbook.path & "\"
   End With
   Debug.Print Join(buf, vbCrLf)
 End Sub
+Sub æ¬¡ã®ã‚·ãƒ¼ãƒˆ()
+
+    ActiveSheet.Next.Select
+
+End Sub
+Sub å‰ã®ã‚·ãƒ¼ãƒˆ()
+
+    ActiveSheet.Previous.Select
+
+End Sub
+
 
 
 
