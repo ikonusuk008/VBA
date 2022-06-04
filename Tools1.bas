@@ -39,6 +39,8 @@ Attribute Insert_todays_row_in_the_date_column.VB_ProcData.VB_Invoke_Func = "y\n
             
             Columns("A:A").EntireColumn.AutoFit
             
+            Range("b2").Select
+            
             Exit For
         End If
         
